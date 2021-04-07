@@ -18,17 +18,24 @@ resources:
 trigger:
 - master
 
-steps: 
-- checkout: self
-- checkout: MyGitHubRepo
-- checkout: MyGitHubRepo2
-
 variables:
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
 stages:
+- stage: Checkout
+  displayName: checkout
+  jobs:
+    - job: Checkout
+      steps: 
+        - checkout: self
+        - checkout: MyGitHubRepo
+        - checkout: MyGitHubRepo2
+
+
+
+
 - stage: Build
   displayName: Build stage
   jobs:
